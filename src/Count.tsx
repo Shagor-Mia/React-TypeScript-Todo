@@ -1,5 +1,5 @@
 const Count = () => {
-  return <div>count:</div>;
+  return <div>count:0</div>;
 };
 
 export default Count;
