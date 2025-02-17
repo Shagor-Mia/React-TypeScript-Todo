@@ -2,12 +2,26 @@ import { createContext, useState } from "react";
 
 export const TodosContextAPI = createContext(null);
 
-export const TodosProvider = ({ children }) => {
-  const [todos, setTodos] = useState([]);
+interface Props {
+  children: React.ReactNode;
+};
 
-  const handleAddTodo = (todo) => {
+interface Todo {
+  id: string;
+  title: string;
+  completed: boolean;
+}
+
+export const TodosProvider = ({ children }: Props) => {
+  const [todos, setTodos] = useState<Todo[]>([]);
+
+  const handleAddTodo = (todo: Todo) => {
     setTodos([...todos, todo]);
   };
 
-  return <TodosContextAPI.Provider>{children}</TodosContextAPI.Provider>;
+  return (
+    <TodosContextAPI.Provider value={{ todos, handleAddTodo }}>
+      {children}
+    </TodosContextAPI.Provider>
+  );
 };
